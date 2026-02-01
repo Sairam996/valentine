@@ -47,4 +47,148 @@ button {
   transition:all 0.25s ease;
 }
 
-#y
+#yes {
+  background:#ff4d6d;
+  color:white;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%) scale(1.15);
+  animation: yesPulse 1.4s infinite;
+}
+
+@keyframes yesPulse {
+  0% { transform:translateX(-50%) scale(1.15); }
+  50% { transform:translateX(-50%) scale(1.25); }
+  100% { transform:translateX(-50%) scale(1.15); }
+}
+
+#no {
+  background:#ddd;
+  color:#333;
+  right:0;
+  bottom:0;
+}
+
+/* Sections */
+.section {
+  display:none;
+  animation:fadeIn 1s ease;
+}
+
+.big {
+  font-size:50px;
+  animation:pulse 1.2s infinite;
+}
+
+.love-text {
+  color:#ff4d6d;
+  font-size:22px;
+  font-weight:bold;
+}
+
+@keyframes pulse {
+  0%{transform:scale(1);}
+  50%{transform:scale(1.4);}
+  100%{transform:scale(1);}
+}
+
+@keyframes fadeIn {
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_2c1a65e4d4.mp3">
+</audio>
+
+<div class="card">
+
+  <!-- Question -->
+  <div id="q">
+    <h1>Thanmayee 💕<br>Will you be my Valentine?</h1>
+    <div class="buttons">
+      <button id="yes">Yes 💖</button>
+      <button id="no">No 🙈</button>
+    </div>
+  </div>
+
+  <!-- Love flow -->
+  <div class="section" id="letter">
+    <div class="big">💌</div>
+    <p>You are my calm, my joy, my favorite feeling 🌸</p>
+  </div>
+
+  <div class="section" id="hug">
+    <div class="big">🤗</div>
+    <p class="love-text">A warm hug just for you</p>
+  </div>
+
+  <div class="section" id="kiss">
+    <div class="big">💋</div>
+    <p class="love-text">One gentle kiss full of love</p>
+  </div>
+
+  <div class="section" id="final">
+    <div class="big">❤️</div>
+    <p class="love-text">I Love You, Thanmayee<br>Forever & Always</p>
+  </div>
+
+</div>
+
+<script>
+const no = document.getElementById("no");
+const yes = document.getElementById("yes");
+const music = document.getElementById("music");
+
+let trickMode = false;
+
+// NO escapes and becomes smaller
+function moveNo() {
+  if (trickMode) return;
+  no.style.left = Math.random()*140 + "px";
+  no.style.top = Math.random()*80 + "px";
+  no.style.transform = "scale(0.7)";
+}
+
+no.addEventListener("mouseover", moveNo);
+no.addEventListener("mousedown", moveNo);
+no.addEventListener("touchstart", moveNo);
+
+// Trick moment
+setInterval(() => {
+  if (trickMode) return;
+  no.style.left = "50%";
+  no.style.bottom = "0";
+  no.style.transform = "translateX(-120%) scale(0.7)";
+  trickMode = true;
+  setTimeout(()=>trickMode=false,2500);
+}, 6000);
+
+// Click NO during trick
+no.addEventListener("click", () => {
+  if (!trickMode) return;
+  document.getElementById("q").style.display="none";
+  alert("Haha 😘 You tried… but my heart already chose you ❤️");
+});
+
+// YES = love flow
+yes.onclick = () => {
+  music.play();
+  document.getElementById("q").style.display="none";
+  show("letter",2000);
+  show("hug",4000);
+  show("kiss",6000);
+  show("final",8000);
+};
+
+function show(id, delay){
+  setTimeout(()=>document.getElementById(id).style.display="block",delay);
+}
+</script>
+
+</body>
+</html>
