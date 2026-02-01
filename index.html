@@ -8,111 +8,43 @@
 <style>
 * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
+body {
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  overflow:hidden;
+}
+
+/* Card */
+.card {
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 25px 50px rgba(0,0,0,0.25);
+  position:relative;
+  z-index:2;
+}
+
+/* Buttons */
+.buttons {
+  position:relative;
+  height:120px;
+}
+
 button {
-  padding: 14px 30px;
-  font-size: 18px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  transition: all 0.25s ease;
+  padding:14px 30px;
+  font-size:18px;
+  border-radius:30px;
+  border:none;
+  cursor:pointer;
+  position:absolute;
+  transition:all 0.25s ease;
 }
 
-#yes {
-  background:#ff4d6d;
-  color:white;
-  left:50%;
-  transform:translateX(-50%) scale(1.15);
-  bottom:0;
-  animation: yesPulse 1.4s infinite;
-}
-
-@keyframes yesPulse {
-  0% { transform: translateX(-50%) scale(1.15); }
-  50% { transform: translateX(-50%) scale(1.25); }
-  100% { transform: translateX(-50%) scale(1.15); }
-}
-
-#no {
-  background:#ddd;
-  color:#333;
-  right:0;
-  bottom:0;
-}
-</style>
-</head>
-
-<body>
-
-<!-- Floating hearts -->
-<script>
-const no = document.getElementById("no");
-const yes = document.getElementById("yes");
-const music = document.getElementById("music");
-
-let trickMode = false; // becomes true when NO jumps near YES
-
-function moveNo() {
-  if (trickMode) return;
-
-  const x = Math.random() * 140;
-  const y = Math.random() * 80;
-
-  no.style.left = x + "px";
-  no.style.top = y + "px";
-  no.style.transform = "scale(0.7)";
-}
-
-// NO always escapes on hover or attempt
-no.addEventListener("mouseover", moveNo);
-no.addEventListener("mousedown", moveNo);
-no.addEventListener("touchstart", moveNo);
-
-// Occasionally place NO near YES (the trick 😄)
-setInterval(() => {
-  if (trickMode) return;
-
-  no.style.left = "50%";
-  no.style.bottom = "0";
-  no.style.transform = "translateX(-120%) scale(0.7)";
-  trickMode = true;
-
-  setTimeout(() => trickMode = false, 2500);
-}, 6000);
-
-// If NO is clicked during trick moment
-no.addEventListener("click", () => {
-  if (!trickMode) return;
-
-  document.getElementById("q").style.display = "none";
-  showMessage("Haha 😘 You tried… but my heart already chose you ❤️");
-});
-
-// YES click = main love flow
-yes.onclick = () => {
-  music.play();
-  document.getElementById("q").style.display = "none";
-  show("letter",2000);
-  show("hug",4000);
-  show("kiss",6000);
-  show("final",8000);
-};
-
-function show(id, delay) {
-  setTimeout(() => {
-    document.getElementById(id).style.display = "block";
-  }, delay);
-}
-
-function showMessage(text) {
-  const msg = document.createElement("div");
-  msg.className = "section";
-  msg.style.display = "block";
-  msg.innerHTML = `<div class="big">😄</div><p class="love-text">${text}</p>`;
-  document.querySelector(".card").appendChild(msg);
-}
-</script>
-
-</body>
-</html>
-
+#y
